@@ -11,3 +11,9 @@
 
 ## Estructura
 [Explicación de la organización del repositorio]
+
+## Instalación y Uso
+[Instrucciones si son necesarias]
+
+## Tecnologías Utilizadas
+[Lista de lenguajes, frameworks, etc.]
