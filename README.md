@@ -1,2 +1,13 @@
 # k_brazos_GGM
-Práctica 1 de Aprendizaje por refuerzo de la asignatura "Extensinoes de Machine Learning". Realizado por Ana Gil Molina, José María García Ortiz y Levi Malest Villarreal
+
+## Información
+- **Alumnos:** Apellido1, Nombre1; Apellido2, Nombre2; ...
+- **Asignatura:** Nombre de la asignatura
+- **Curso:** 2024/2025
+- **Grupo:** X
+- 
+## Descripción
+[Breve descripción del trabajo y sus objetivos]
+
+## Estructura
+[Explicación de la organización del repositorio]
