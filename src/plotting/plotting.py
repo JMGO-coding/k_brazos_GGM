@@ -12,15 +12,14 @@ with the additional restriction that it may not be used for commercial purposes.
 For more details about GPL-3.0: https://www.gnu.org/licenses/gpl-3.0.html
 """
 
+# [1] - Importamos las lobrerías y clases necesarias
 from typing import List
-
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
-
 from algorithms import Algorithm, EpsilonGreedy
 
-
+# [2] - Definimos algunas funciones de visualización
 def get_algorithm_label(algo: Algorithm) -> str:
     """
     Genera una etiqueta descriptiva para el algoritmo incluyendo sus parámetros.
@@ -76,18 +75,19 @@ def plot_optimal_selections(steps: int, optimal_selections: np.ndarray, algorith
     sns.set_theme(style="whitegrid", palette="muted", font_scale=1.2)
 
     plt.figure(figsize=(14, 7))
-    for idx, algo in enumerate(algorithms):
-        label = get_algorithm_label(algo)
-        plt.plot(range(steps), optimal_selections[idx], label=label, linewidth=2)
-
-    plt.xlabel('Pasos de Tiempo', fontsize=14)
+    for idx, algo in enumerate(algorithms):                                           # Recorriendo los algoritmos del listado...
+        label = get_algorithm_label(algo)                                            
+        plt.plot(range(steps), optimal_selections[idx], label=label, linewidth=2)         # ...hacemos un plot del número de elecciones de brazo óptimas acmulativa respecto del número de etapas del algoritmo
+    
+    # Tuning del gráfico para una mejor visualización 
+    plt.xlabel('Pasos de Tiempo', fontsize=14)        
     plt.ylabel('Porcentaje de elecciones óptimas', fontsize=14)
     plt.title('Porcentaje de elecciones óptimas vs Pasos de Tiempo', fontsize=16)
     plt.legend(title='Algoritmos')
     plt.tight_layout()
     plt.show()
 
-    raise NotImplementedError("Esta función aún no ha sido implementada.")
+    # raise NotImplementedError("Esta función aún no ha sido implementada.")
 
 
 def plot_arm_statistics(arm_stats: List[dict], algorithms: List[Algorithm], optimal_arms_list, num_choices_list, *args):
@@ -99,7 +99,8 @@ def plot_arm_statistics(arm_stats: List[dict], algorithms: List[Algorithm], opti
     :param args: Parámetros que consideres
     :param optimal_arms_list: 
     """
-
+    
+    # Definimos internamente una función que crea histogramas de forma algo más genérica para después particularizar con los requierimientos de ``plot_arm_statistics``
     def plot_histograms(n, data_list, configs, highlight_bars, num_choices, text_color="blue", vertical_spacing=1.5):
         """
         Genera una figura de N x 1 histogramas con configuraciones personalizadas y etiquetas sobre las barras.
@@ -117,23 +118,22 @@ def plot_arm_statistics(arm_stats: List[dict], algorithms: List[Algorithm], opti
 
         if n == 1:
             axes = [axes]
-
+            
+        # Creamos una gráfica para cada histograma y seleccinoamos para cada una, unos datos que graficar y una configuración de plot.
         for i, ax in enumerate(axes):
             data = data_list[i]
             config = configs[i]
             highlight_indices = highlight_bars[i] if i < len(highlight_bars) else []
             choices = num_choices[i] if i < len(num_choices) else []
-
             color = config.get("color", "blue")
             highlight_color = config.get("highlight_color", "red")
             edgecolor = config.get("edgecolor", "black")
             alpha = config.get("alpha", 0.7)
-
             bins = config.get("bins", 10)
             histtype = config.get("histtype", "bar")
-
-            counts, bins, patches = ax.hist(data, bins=bins, color=color, edgecolor=edgecolor, alpha=alpha, histtype=histtype)
-
+            counts, bins, patches = ax.hist(data, bins=bins, color=color, edgecolor=edgecolor, alpha=alpha, histtype=histtype)     # Creamos el histograma con los parámetros seleccionados
+            
+            # Añadimos strings sobre las barras de los histogramas, que se corresponderán en la práctica con el número de veces que cada brazo es seleccinoado
             for j, patch in enumerate(patches):
                 if j in highlight_indices:
                     patch.set_facecolor(highlight_color)
@@ -141,20 +141,21 @@ def plot_arm_statistics(arm_stats: List[dict], algorithms: List[Algorithm], opti
                 label = choices[j] if j < len(choices) else ""
                 ax.text(patch.get_x() + patch.get_width() / 2, patch.get_height(), label, 
                         ha='center', va='bottom', fontsize=10, color=text_color)
-
+                
+            # Configuraciones del plot
             ax.set_title(config.get("title", f"Histograma {i+1}"))
             ax.set_xlabel(config.get("xlabel", "Brazo seleccionado"))
             ax.set_ylabel(config.get("ylabel", "Promedio de ganancias por brazo"))
             ax.grid(config.get("grid", True))
 
         plt.show()
-
+        
+    # Ahora llamamos a la función de visualización de histogramas pasándole los datos de entrada 
     n = len(algorithms)
     data_list = [[arm_stats[j][key]["media"] for key in arm_stats[j].keys] for j in range(len(arm_stats))]
     configs = [{"color": "gray", "bins": 0.5, "title": f"Histograma {get_algorithm_label(alg)}", "highlight_color": "red"} for alg in algorithms]
     highlight_bars = [[num] for num in optimal_arms_list]
     num_choices = [[choice] for choice in num_choices_list]
-
     plot_histograms(n, data_list, configs, highlight_bars, num_choices=num_choices)
 
 
