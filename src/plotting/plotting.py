@@ -114,7 +114,7 @@ def plot_arm_statistics(arm_stats: List[dict], algorithms: List[Algorithm], opti
         :param text_color: Color del texto de las etiquetas sobre las barras
         :param vertical_spacing: Espaciado vertical entre los subplots
         """
-        fig, axes = plt.subplots(n, 1, figsize=(12, 5 * n), constrained_layout=True)
+        fig, axes = plt.subplots(n, 1, figsize=(12, 7 * n), constrained_layout=True)
         fig.set_layout_engine(None)
         fig.subplots_adjust(hspace=vertical_spacing)
 
