@@ -96,13 +96,13 @@ def plot_arm_statistics(arm_stats: List[dict], algorithms: List[Algorithm], opti
     Ganancias vs Pérdidas para cada algoritmo.
     :param arm_stats: Lista (de diccionarios) con estadísticas de cada brazo por algoritmo.
     :param algorithms: Lista de instancias de algoritmos comparados.
-    :param num_choices: Lista de listas con etiquetas de texto para cada barra
+    :param num_choices_list: Lista de listas que indican el nº de veces que se elige cada brazo del bandido en la ejecución de cada algoritmo
     :param optimal_arms_list: lista que contiene el número de brazo óptimo para cada algoritmo en ``algorithms``
     :param args: Parámetros que consideres
     """
     
     # Definimos internamente una función que crea histogramas de forma algo más genérica para después particularizar con los requierimientos de ``plot_arm_statistics``
-    def plot_histograms(n, data_list, configs, highlight_bars, num_choices, text_color="blue", vertical_spacing=1.5):
+    def plot_histograms(n, data_list, configs, highlight_bars, str_choices, text_color="blue", vertical_spacing=1.5):
         """
         Genera una figura de N x 1 histogramas con configuraciones personalizadas y etiquetas sobre las barras.
 
@@ -110,7 +110,7 @@ def plot_arm_statistics(arm_stats: List[dict], algorithms: List[Algorithm], opti
         :param data_list: Lista de conjuntos de datos para cada histograma
         :param configs: Lista de diccionarios con configuraciones para cada histograma
         :param highlight_bars: Lista de listas de índices de barras a resaltar en cada histograma
-        :param num_choices: Lista de listas con etiquetas de texto para cada barra
+        :param str_choices: Lista de listas con etiquetas de texto para cada barra
         :param text_color: Color del texto de las etiquetas sobre las barras
         :param vertical_spacing: Espaciado vertical entre los subplots
         """
@@ -125,7 +125,7 @@ def plot_arm_statistics(arm_stats: List[dict], algorithms: List[Algorithm], opti
             data = data_list[i]
             config = configs[i]
             highlight_indices = highlight_bars[i] if i < len(highlight_bars) else []
-            choices = num_choices[i] if i < len(num_choices) else []
+            choices = str_choices[i] if i < len(str_choices) else []
             color = config.get("color", "blue")
             highlight_color = config.get("highlight_color", "red")
             edgecolor = config.get("edgecolor", "black")
@@ -156,8 +156,8 @@ def plot_arm_statistics(arm_stats: List[dict], algorithms: List[Algorithm], opti
     data_list = [[arm_stats[j][key]["media"] for key in arm_stats[j].keys] for j in range(len(arm_stats))]
     configs = [{"color": "gray", "bins": 0.5, "title": f"Histograma {get_algorithm_label(alg)}", "highlight_color": "red"} for alg in algorithms]
     highlight_bars = [[num] for num in optimal_arms_list]
-    num_choices = [[choice] for choice in num_choices_list]
-    plot_histograms(n, data_list, configs, highlight_bars, num_choices=num_choices)
+    str_choices = [["N"+str(j)+": "+str(num_choices_list[i][j])] for i in range(len(num_choices_list)) for j in range(len(num_choices_list[i]))]
+    plot_histograms(n, data_list, configs, highlight_bars, str_choices=str_choices)
 
 
     ''' - COMENTARIO SOBRE ESTRUCTURA DE LOS DATOS EN ``data_list``, BORRAR CUANDO EL CÓDIGO FUNCIONE -
