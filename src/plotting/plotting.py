@@ -148,7 +148,7 @@ def plot_arm_statistics(arm_stats: List[dict], algorithms: List[Algorithm], opti
             ax.set_title(config.get("title", f"Histograma {i+1}"))
             ax.set_xlabel(config.get("xlabel", "Brazo seleccionado"))
             ax.set_xticks(0.5 * (bins[:-1] + bins[1:]))
-            ax.set_xtickslabels(range(1, len(arm_stats[i])+1))
+            ax.set_xticklabels(range(1, len(arm_stats[i])+1))
             ax.set_ylabel(config.get("ylabel", "Promedio de ganancias por brazo"))
             ax.grid(config.get("grid", True))
 
