@@ -96,8 +96,9 @@ def plot_arm_statistics(arm_stats: List[dict], algorithms: List[Algorithm], opti
     Ganancias vs Pérdidas para cada algoritmo.
     :param arm_stats: Lista (de diccionarios) con estadísticas de cada brazo por algoritmo.
     :param algorithms: Lista de instancias de algoritmos comparados.
+    :param num_choices: Lista de listas con etiquetas de texto para cada barra
+    :param optimal_arms_list: lista que contiene el número de brazo óptimo para cada algoritmo en ``algorithms``
     :param args: Parámetros que consideres
-    :param optimal_arms_list: lista que contiene el número de brazo óptimo para cada algoritmo en ``algorithms`` 
     """
     
     # Definimos internamente una función que crea histogramas de forma algo más genérica para después particularizar con los requierimientos de ``plot_arm_statistics``
