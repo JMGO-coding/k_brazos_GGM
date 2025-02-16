@@ -159,14 +159,6 @@ def plot_arm_statistics(arm_stats: List[dict], algorithms: List[Algorithm], opti
     str_choices = [["N"+str(j)+": "+str(num_choices_list[i][j])] for i in range(len(num_choices_list)) for j in range(len(num_choices_list[i]))]
     plot_histograms(n, data_list, configs, highlight_bars, str_choices=str_choices)
 
-
-    ''' - COMENTARIO SOBRE ESTRUCTURA DE LOS DATOS EN ``data_list``, BORRAR CUANDO EL CÓDIGO FUNCIONE -
-
-    d1 = {"arm_1" : {"media":mu_1 , "std" : sigma_1},
-          "arm_2" : {"media":mu_2 , "std" : sigma_2}}
-    
-    [d1,d2,d3]
-    '''
     
 
 def plot_regret(steps: int, regret_accumulated: np.ndarray, algorithms: List[Algorithm], theoretical_bound: np.ndarray = None):
