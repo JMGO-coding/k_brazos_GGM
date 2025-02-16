@@ -153,7 +153,7 @@ def plot_arm_statistics(arm_stats: List[dict], algorithms: List[Algorithm], opti
         
     # Ahora llamamos a la función de visualización de histogramas pasándole los datos de entrada 
     n = len(algorithms)
-    data_list = [[arm_stats[j][key]["media"] for key in arm_stats[j].keys] for j in range(len(arm_stats))]
+    data_list = [[arm_stats[j][key]["media"] for key in arm_stats[j].keys()] for j in range(len(arm_stats))]
     configs = [{"color": "gray", "bins": 0.5, "title": f"Histograma {get_algorithm_label(alg)}", "highlight_color": "red"} for alg in algorithms]
     highlight_bars = [[num] for num in optimal_arms_list]
     str_choices = [["N"+str(j)+": "+str(num_choices_list[i][j])] for i in range(len(num_choices_list)) for j in range(len(num_choices_list[i]))]
