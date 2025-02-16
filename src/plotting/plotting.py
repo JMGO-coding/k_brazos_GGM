@@ -115,7 +115,8 @@ def plot_arm_statistics(arm_stats: List[dict], algorithms: List[Algorithm], opti
         :param vertical_spacing: Espaciado vertical entre los subplots
         """
         fig, axes = plt.subplots(n, 1, figsize=(6, 4 * n), constrained_layout=True)
-        fig.subplots_adjust(hspace=vertical_spacing)
+        # fig.subplots_adjust(hspace=vertical_spacing)
+        fig.tight_layout()
 
         if n == 1:
             axes = [axes]
