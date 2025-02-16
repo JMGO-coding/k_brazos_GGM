@@ -115,8 +115,8 @@ def plot_arm_statistics(arm_stats: List[dict], algorithms: List[Algorithm], opti
         :param vertical_spacing: Espaciado vertical entre los subplots
         """
         fig, axes = plt.subplots(n, 1, figsize=(6, 4 * n), constrained_layout=True)
-        # fig.subplots_adjust(hspace=vertical_spacing)
-        fig.tight_layout()
+        fig.set_layout_engine(None)
+        fig.subplots_adjust(hspace=vertical_spacing)
 
         if n == 1:
             axes = [axes]
@@ -131,7 +131,7 @@ def plot_arm_statistics(arm_stats: List[dict], algorithms: List[Algorithm], opti
             highlight_color = config.get("highlight_color", "red")
             edgecolor = config.get("edgecolor", "black")
             alpha = config.get("alpha", 0.7)
-            bins = config.get("bins", 10)
+            bins = config.get("bins", len(arm_stats[0].keys()))
             histtype = config.get("histtype", "bar")
             counts, bins, patches = ax.hist(data, bins=bins, color=color, edgecolor=edgecolor, alpha=alpha, histtype=histtype)     # Creamos el histograma con los parámetros seleccionados
             
@@ -147,6 +147,7 @@ def plot_arm_statistics(arm_stats: List[dict], algorithms: List[Algorithm], opti
             # Configuraciones del plot
             ax.set_title(config.get("title", f"Histograma {i+1}"))
             ax.set_xlabel(config.get("xlabel", "Brazo seleccionado"))
+            ax.set_xticks(range(1, len(arm_stats[i])+1))
             ax.set_ylabel(config.get("ylabel", "Promedio de ganancias por brazo"))
             ax.grid(config.get("grid", True))
 
