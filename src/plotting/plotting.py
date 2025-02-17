@@ -127,32 +127,28 @@ def plot_arm_statistics(arm_stats: List[dict], algorithms: List[Algorithm], opti
             config = configs[i]
             highlight_indices = highlight_bars[i] if i < len(highlight_bars) else []
             choices = str_choices[i] if i < len(str_choices) else []
-            color = config.get("color", "blue")
+            color = config.get("color", "gray")
             highlight_color = config.get("highlight_color", "red")
             edgecolor = config.get("edgecolor", "black")
             alpha = config.get("alpha", 0.7)
-            bins = config.get("bins", len(arm_stats[0].keys()))
-            histtype = config.get("histtype", "bar")
-            weights = np.ones_like(data) / len(data)  # Para que las barras admitan valores fraccionarios en altura
-            counts, bins, patches = ax.hist(data, bins=bins, color=color, edgecolor=edgecolor, alpha=alpha, histtype=histtype, weights=weights)     # Creamos el histograma con los parámetros seleccionados
             
-            # Añadimos strings sobre las barras de los histogramas, que se corresponderán en la práctica con el número de veces que cada brazo es seleccinoado
-            for j, patch in enumerate(patches):
+            x_labels = list(range(1, len(data) + 1))
+            bars = ax.bar(x_labels, data, color=color, edgecolor=edgecolor, alpha=alpha)
+
+            for j, bar in enumerate(bars):
                 if j in highlight_indices:
-                    patch.set_facecolor(highlight_color)
+                    bar.set_color(highlight_color)
 
                 label = choices[j] if j < len(choices) else ""
-                ax.text(patch.get_x() + patch.get_width() / 2, patch.get_height(), label, 
+                ax.text(bar.get_x() + bar.get_width() / 2, bar.get_height(), label, 
                         ha='center', va='bottom', fontsize=10, color=text_color)
-                
-            # Configuraciones del plot
-            ax.set_title(config.get("title", f"Histograma {i+1}"))
+            
+            ax.set_title(config.get("title", f"Gráfico de Barras {i+1}"))
             ax.set_xlabel(config.get("xlabel", "Brazo seleccionado"))
-            ax.set_xticks(0.5 * (bins[:-1] + bins[1:]))
-            ax.set_xticklabels(range(1, len(arm_stats[i])+1))
+            ax.set_xticks(x_labels)
             ax.set_ylabel(config.get("ylabel", "Promedio de ganancias por brazo"))
             ax.grid(config.get("grid", True))
-
+        
         plt.show()
         
     # Ahora llamamos a la función de visualización de histogramas pasándole los datos de entrada 
