@@ -102,7 +102,7 @@ def plot_arm_statistics(arm_stats: List[dict], algorithms: List[Algorithm], opti
     """
     
     # Definimos internamente una función que crea histogramas de forma algo más genérica para después particularizar con los requierimientos de ``plot_arm_statistics``
-    def plot_histograms(n, data_list, configs, highlight_bars, str_choices, text_color="blue", vertical_spacing=1.5):
+    def plot_histograms(n, data_list, configs, highlight_bars, str_choices, text_color="blue", vertical_spacing=1):
         """
         Genera una figura de N x 1 histogramas con configuraciones personalizadas y etiquetas sobre las barras.
 
