@@ -133,7 +133,8 @@ def plot_arm_statistics(arm_stats: List[dict], algorithms: List[Algorithm], opti
             alpha = config.get("alpha", 0.7)
             bins = config.get("bins", len(arm_stats[0].keys()))
             histtype = config.get("histtype", "bar")
-            counts, bins, patches = ax.hist(data, bins=bins, color=color, edgecolor=edgecolor, alpha=alpha, histtype=histtype)     # Creamos el histograma con los parámetros seleccionados
+            weights = np.ones_like(data) / len(data)  # Para que las barras admitan valores fraccionarios en altura
+            counts, bins, patches = ax.hist(data, bins=bins, color=color, edgecolor=edgecolor, alpha=alpha, histtype=histtype, weights=weights)     # Creamos el histograma con los parámetros seleccionados
             
             # Añadimos strings sobre las barras de los histogramas, que se corresponderán en la práctica con el número de veces que cada brazo es seleccinoado
             for j, patch in enumerate(patches):
