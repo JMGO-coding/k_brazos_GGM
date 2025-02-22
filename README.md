@@ -1,10 +1,10 @@
 # k_brazos_GGM
 
 ## Información
-- **Alumnos:** Apellido1, Nombre1; Apellido2, Nombre2; ...
-- **Asignatura:** Nombre de la asignatura
+- **Alumnos:** Gil, Ana; García, José María; Malest, Levi.
+- **Asignatura:** Extensiones de Machine Learning.
 - **Curso:** 2024/2025
-- **Grupo:** X
+- **Grupo:** 1
 - 
 ## Descripción
 [Breve descripción del trabajo y sus objetivos]
