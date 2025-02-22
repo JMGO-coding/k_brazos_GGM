@@ -20,9 +20,9 @@ class UCB1(Algorithm):
         :return: El índice del brazo seleccionado.
         """
         total_pulls = np.sum(self.counts)  # Total de tiradas realizadas
-        ucb_values = np.zeros(self.n_arms)
+        ucb_values = np.zeros(self.k)
 
-        for i in range(self.n_arms):
+        for i in range(self.k):
             if self.counts[i] == 0:  # Si nunca ha sido seleccionado, asignamos un valor muy alto para exploración
                 ucb_values[i] = float('inf')
             else:
