@@ -1,19 +1,17 @@
 import numpy as np
 from typing import List
 from algorithms.algorithm import Algorithm
-from arms import Arm
 
 class UCB1(Algorithm):
-    def __init__(self, arms: List[Arm]):
+    def __init__(self, k: int):
         """
         Inicializa el algoritmo UCB1.
 
-        :param arms: Lista de brazos disponibles.
+        :param k: Número de brazos.
         """
-        self.arms = arms
-        self.n_arms = len(arms)
-        self.counts = np.zeros(self.n_arms)  # Número de veces que cada brazo ha sido seleccionado
-        self.values = np.zeros(self.n_arms)  # Media de las recompensas obtenidas para cada brazo
+        super().__init__(k)
+        self.counts = np.zeros(self.k)  # Número de veces que cada brazo ha sido seleccionado
+        self.values = np.zeros(self.k)  # Media de las recompensas obtenidas para cada brazo
     
     def select_arm(self) -> int:
         """
@@ -45,16 +43,3 @@ class UCB1(Algorithm):
         n = self.counts[arm_index]
         # Actualizamos el valor estimado del brazo usando la media incremental
         self.values[arm_index] = (self.values[arm_index] * (n - 1) + reward) / n
-
-    def run(self, rounds: int):
-        """
-        Ejecuta el algoritmo UCB1 durante el número especificado de rondas.
-
-        :param rounds: Número total de rondas.
-        """
-        for t in range(rounds):
-            arm_index = self.select_arm()  # Seleccionamos el brazo
-            reward = self.arms[arm_index].pull()  # Obtenemos la recompensa del brazo seleccionado
-            self.update(arm_index, reward)  # Actualizamos la información de ese brazo
-
-
