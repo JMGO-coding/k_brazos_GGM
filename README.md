@@ -5,7 +5,7 @@
 - **Asignatura:** Extensiones de Machine Learning.
 - **Curso:** 2024/2025
 - **Grupo:** 1
-- 
+ 
 ## Descripción
 [Breve descripción del trabajo y sus objetivos]
 
@@ -13,7 +13,9 @@
 [Explicación de la organización del repositorio]
 
 ## Instalación y Uso
-[Instrucciones si son necesarias]
+A través de ``notebook1.ipynb`` se podrá navegar entre los distintos notebooks que contiene este repositorio, sin más que clicar los enlaces que allí aparecen (véase sección **[2]**).
+Todas estas notebooks están listas para ejecutar sobre Google Colab sin necesidad de ningún paso de instalación previo.
 
 ## Tecnologías Utilizadas
-[Lista de lenguajes, frameworks, etc.]
+- Entorno: Jupyter Notebooks (Google Colab)
+- Lenguajes de programación: Python (100%)
