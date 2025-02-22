@@ -1,7 +1,7 @@
 import numpy as np
 from typing import List
 
-class UCB2:
+class UCB2(Algorithm):
     def __init__(self, arms: List[Arm], alpha: float = 1.0):
         """
         Inicializa el algoritmo UCB2.
