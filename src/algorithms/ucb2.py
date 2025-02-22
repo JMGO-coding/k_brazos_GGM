@@ -1,5 +1,6 @@
 import numpy as np
 from typing import List
+from algorithms.algorithm import Algorithm
 
 class UCB2(Algorithm):
     def __init__(self, arms: List[Arm], alpha: float = 1.0):
