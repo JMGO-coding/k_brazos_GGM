@@ -15,8 +15,8 @@ For more details about GPL-3.0: https://www.gnu.org/licenses/gpl-3.0.html
 # Importación de módulos o clases
 from .algorithm import Algorithm
 from .epsilon_greedy import EpsilonGreedy
-from ucb1 import UCB1
-from ucb2 import UCB2
+from .ucb1 import UCB1
+from .ucb2 import UCB2
 from .softmax import Softmax
 from .gradiente_preferencias import GradientePreferencias
 
