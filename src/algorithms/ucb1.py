@@ -1,6 +1,7 @@
 import numpy as np
 from typing import List
 from algorithms.algorithm import Algorithm
+from arms import Arm
 
 class UCB1(Algorithm):
     def __init__(self, arms: List[Arm]):
