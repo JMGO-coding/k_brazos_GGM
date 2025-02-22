@@ -36,6 +36,10 @@ def get_algorithm_label(algo: Algorithm) -> str:
          label = label
     elif isinstance(algo, UCB2):
          label += f" (alpha={algo.alpha})"
+    elif isinstance(algo, GradienteDePreferencias):
+         label += f" (alpha={algo.alpha})"
+    elif isinstance(algo, Softmax):
+         label += f" (tau={algo.tau})"
     else:
         raise ValueError("El algoritmo debe ser de la clase Algorithm o una subclase.")
     return label
