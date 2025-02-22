@@ -17,7 +17,7 @@ from typing import List
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
-from algorithms import Algorithm, EpsilonGreedy
+from algorithms import Algorithm, EpsilonGreedy, UCB1, UCB2, GradienteDePreferencias, Softmax
 
 # [2] - Definimos algunas funciones de visualización
 def get_algorithm_label(algo: Algorithm) -> str:
