@@ -18,6 +18,7 @@ from .epsilon_greedy import EpsilonGreedy
 from .ucb1 import UCB1
 from .ucb2 import UCB2
 from .softmax import Softmax
+from .adaptive_softmax import AdaptiveSoftmax
 from .gradiente_preferencias import GradienteDePreferencias
 
 # Lista de módulos o clases públicas
