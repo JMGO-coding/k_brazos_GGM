@@ -26,12 +26,21 @@ class AdaptiveSoftmax(Algorithm):
         Selecciona un brazo basado en la política Softmax con tau adaptativo.
         :return: índice del brazo seleccionado.
         """
-        tau = max(self.tau_0 / (1 + self.alpha * self.t), 0.01)    # Para evitar desbordamientos numéricos
-        exp_values = np.exp(self.values / tau)
-        prob = exp_values / np.sum(exp_values)
+        tau = max(self.tau_0 / (1 + self.alpha * self.t), 1e-6)  # Evitar tau demasiado pequeño
         
-        chosen_arm = np.random.choice(self.k, p=prob)
-        return chosen_arm
+        exp_values = np.exp(np.clip(self.values / tau, -500, 500))  # Evita desbordamientos
+        sum_exp = np.sum(exp_values)
+    
+        if sum_exp == 0 or np.isnan(sum_exp):  # Si hay problemas, usar distribución uniforme
+            prob = np.ones(self.k) / self.k
+        else:
+            prob = exp_values / sum_exp
+    
+        # Verifica que la suma de probabilidades sea 1 y no haya NaN
+        assert np.isclose(np.sum(prob), 1), f"Las probabilidades no suman 1: {prob}"
+        
+        return np.random.choice(self.k, p=prob)
+
 
     def update(self, chosen_arm: int, reward: float):
         """
