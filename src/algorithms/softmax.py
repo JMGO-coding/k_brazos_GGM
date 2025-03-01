@@ -26,6 +26,8 @@ class Softmax(Algorithm):
 
         super().__init__(k)
         self.tau = tau
+        self.counts = np.zeros(k)  # Contador de selecciones por brazo
+        self.values = np.zeros(k)  # Estimación de recompensa por brazo
 
     def select_arm(self) -> int:
         """
@@ -41,3 +43,14 @@ class Softmax(Algorithm):
         chosen_arm = np.random.choice(self.k, p=prob)
 
         return chosen_arm
+
+    def update(self, chosen_arm: int, reward: float):
+        """
+        Actualiza los valores estimados del brazo seleccionado.
+
+        :param chosen_arm: Índice del brazo seleccionado.
+        :param reward: Recompensa obtenida del brazo seleccionado.
+        """
+        self.counts[chosen_arm] += 1
+        n = self.counts[chosen_arm]
+        self.values[chosen_arm] += (reward - self.values[chosen_arm]) / n
