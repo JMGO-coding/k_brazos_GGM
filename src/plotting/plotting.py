@@ -40,6 +40,8 @@ def get_algorithm_label(algo: Algorithm) -> str:
          label += f" (alpha={algo.alpha})"
     elif isinstance(algo, Softmax):
          label += f" (tau={algo.tau})"
+    elif isinstance(algo, AdaptiveSoftmax):
+         label += f" (tau_0={algo.tau_0} , alpha={algo.alpha})"
     else:
         raise ValueError("El algoritmo debe ser de la clase Algorithm o una subclase.")
     return label
