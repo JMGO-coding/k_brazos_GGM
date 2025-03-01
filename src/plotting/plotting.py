@@ -12,12 +12,12 @@ with the additional restriction that it may not be used for commercial purposes.
 For more details about GPL-3.0: https://www.gnu.org/licenses/gpl-3.0.html
 """
 
-# [1] - Importamos las lobrerías y clases necesarias
+# [1] - Importamos las librerías y clases necesarias
 from typing import List
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
-from algorithms import Algorithm, EpsilonGreedy, UCB1, UCB2, GradienteDePreferencias, Softmax
+from algorithms import Algorithm, EpsilonGreedy, UCB1, UCB2, GradienteDePreferencias, Softmax, AdaptiveSoftmax
 
 # [2] - Definimos algunas funciones de visualización
 def get_algorithm_label(algo: Algorithm) -> str:
