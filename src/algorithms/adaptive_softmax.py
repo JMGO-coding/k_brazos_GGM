@@ -9,7 +9,7 @@ class AdaptiveSoftmax(Algorithm):
 
         :param k: Número de brazos.
         :param tau_0: Valor inicial del parámetro tau.
-        :param alpha: Parámetro de ajuste para la disminución de tau.
+        :param alpha: Parámetro de ajuste para la disminución de tau (0.001 - 1 | Exploracion - Explotacion).
         """
         assert tau_0 > 0, "El parámetro tau_0 debe ser mayor que 0."
         assert alpha >= 0, "El parámetro alpha debe ser no negativo."
