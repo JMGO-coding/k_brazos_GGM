@@ -15,9 +15,10 @@ Contiene un informe del experimento en formato ``.pdf`` y otros ficheros ``.py``
 - /docs/ $\hspace{0.1 cm}$ Contiene los ficheros ``.pdf``
 - /tests/ $\hspace{0.1 cm}$ Contiene ficheros de test.
 - /src/   $\hspace{0.42 cm}$ Contiene los scripts de python ``.py``, organizados en las siguientes subcarpetas:
+  
   - ./algorithms/ $\hspace{0.2 cm}$ --> $\hspace{0.15 cm}$ Aquí encontramos las diferentes clases elaboradas para modelizar los agentes de decisión
-  - ./arms/ $\hspace{0.4 cm}$ --> $\hspace{0.15 cm}$ Aquí encontramos las diferentes clases elaboradas para modelizar los brazos del bandido
-  - ./plotting/ $\hspace{0.25 cm}$ --> $\hspace{0.15 cm}$ Aquí encontramos un script con las funciones que hemos empleado para realizar visualizaciones gráficas
+  - ./arms/ $\hspace{0.8 cm}$ --> $\hspace{0.15 cm}$ Aquí encontramos las diferentes clases elaboradas para modelizar los brazos del bandido
+  - ./plotting/ $\hspace{0.45 cm}$ --> $\hspace{0.15 cm}$ Aquí encontramos un script con las funciones que hemos empleado para realizar visualizaciones gráficas
 
 ## Instalación y Uso
 A través de ``main.ipynb`` se podrá navegar entre los distintos notebooks que contiene este repositorio, sin más que clicar los enlaces que allí aparecen (véase sección **[2]**).
