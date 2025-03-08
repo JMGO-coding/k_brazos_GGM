@@ -14,7 +14,7 @@ Contiene un informe del experimento en formato ``.pdf`` y otros ficheros ``.py``
 - /data/  $\hspace{0.15 cm}$ Contiene los ficheros de datos neecsarios para el estudio.
 - /docs/ $\hspace{0.1 cm}$ Contiene los ficheros ``.pdf``
 - /tests/ $\hspace{0.1 cm}$ Contiene ficheros de test.
-- /src/   $\hspace{0.4 cm}$ Contiene los scripts de python ``.py``, organizados en las siguientes subcarpetas:
+- /src/   $\hspace{0.42 cm}$ Contiene los scripts de python ``.py``, organizados en las siguientes subcarpetas:
   - ./algorithms/ Aquí encontramos las diferentes clases elaboradas para modelizar los agentes de decisión
 
 ## Instalación y Uso
