@@ -16,6 +16,7 @@ import numpy as np
 
 from algorithms.algorithm import Algorithm
 
+
 class EpsilonGreedy(Algorithm):
 
     def __init__(self, k: int, epsilon: float = 0.1):
@@ -30,22 +31,23 @@ class EpsilonGreedy(Algorithm):
 
         super().__init__(k)
         self.epsilon = epsilon
+        self.initial_exploration = set(range(k))  # Conjunto de brazos aún no explorados
 
     def select_arm(self) -> int:
         """
-        Selecciona un brazo basado en la política epsilon-greedy.
+        Selecciona un brazo basado en la política epsilon-greedy, asegurando que cada brazo
+        sea seleccionado al menos una vez antes de iniciar la exploración/explotación normal.
         :return: índice del brazo seleccionado.
         """
-
+        if self.initial_exploration:
+            # Extraer y eliminar un brazo del conjunto de brazos sin explorar
+            return self.initial_exploration.pop()
+        
         if np.random.random() < self.epsilon:
             # Selecciona un brazo al azar
-            chosen_arm = np.random.choice(self.k)
+            return np.random.choice(self.k)
         else:
             # Selecciona el brazo con la recompensa promedio estimada más alta
-            chosen_arm = np.argmax(self.values)
-
-        return chosen_arm
-
-
+            return np.argmax(self.values)    # Chosen arm
 
 
