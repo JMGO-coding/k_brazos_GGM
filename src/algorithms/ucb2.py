@@ -29,7 +29,7 @@ class UCB2(Algorithm):
                 ucb_values[i] = float('inf')
             else:
                 # Fórmula de UCB2 con el parámetro alpha
-                ucb_values[i] = self.values[i] + np.sqrt((self.alpha * np.log(total_pulls)) / self.counts[i])
+                ucb_values[i] = self.values[i] + np.sqrt(((1+self.alpha) * np.log(total_pulls/self.counts[i])) / 2*self.counts[i])
 
         # Selecciona el brazo con el mayor UCB2
         return np.argmax(ucb_values)
