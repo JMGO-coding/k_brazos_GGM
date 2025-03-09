@@ -11,9 +11,7 @@ Este repositorio ha sido creado para realizar un estudio comparativo entre disti
 Contiene un informe del experimento en formato ``.pdf`` y otros ficheros ``.py`` y ``.ipynb`` que dan respaldo a los contenidos que aparecen en el informe. 
 
 ## Estructura
-- /data/  $\hspace{0.15 cm}$ Contiene los ficheros de datos neecsarios para el estudio.
 - /docs/ $\hspace{0.1 cm}$ Contiene los ficheros ``.pdf``
-- /tests/ $\hspace{0.1 cm}$ Contiene ficheros de test.
 - /src/   $\hspace{0.42 cm}$ Contiene los scripts de python ``.py``, organizados en las siguientes subcarpetas:
   
   - ./algorithms/ $\hspace{0.2 cm}$ --> $\hspace{0.15 cm}$ Aquí encontramos las diferentes clases elaboradas para modelizar los agentes de decisión
