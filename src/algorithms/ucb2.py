@@ -10,10 +10,11 @@ class UCB2(Algorithm):
         :param k: Número de brazos.
         :param alpha: Parámetro que regula la exploración. Valores más grandes aumentan la exploración.
         """
-        super().__init__(k)
-        self.counts = np.zeros(self.k)  # Número de veces que cada brazo ha sido seleccionado
-        self.values = np.zeros(self.k)  # Media de las recompensas obtenidas para cada brazo
+        # Se asume que Algorithm no necesita inicialización con k, se omite super().__init__(k) si no es necesario
+        self.k = k
         self.alpha = alpha  # Parámetro para ajustar la exploración
+        self.counts = np.zeros(self.k, dtype=int)  # Veces que cada brazo ha sido seleccionado
+        self.values = np.zeros(self.k)  # Media de recompensas obtenidas para cada brazo
     
     def select_arm(self) -> int:
         """
@@ -21,18 +22,23 @@ class UCB2(Algorithm):
 
         :return: El índice del brazo seleccionado.
         """
-        total_pulls = np.sum(self.counts)  # Total de tiradas realizadas
+        total_pulls = np.sum(self.counts)
+
+        # Si no hay selecciones previas, elegimos un brazo aleatorio
+        if total_pulls == 0:
+            return np.random.randint(self.k)
+
         ucb_values = np.zeros(self.k)
 
         for i in range(self.k):
-            if self.counts[i] == 0:  # Si nunca ha sido seleccionado, asignamos un valor muy alto para exploración
-                ucb_values[i] = float('inf')
+            if self.counts[i] == 0:  
+                ucb_values[i] = float('inf')  # Explorar brazos no seleccionados aún
             else:
-                # Fórmula de UCB2 con el parámetro alpha
-                ucb_values[i] = self.values[i] + np.sqrt(((1+self.alpha) * np.log(total_pulls/self.counts[i])) / (2*self.counts[i]))
+                # Fórmula corregida de UCB2
+                log_term = np.log(max(1, total_pulls) / self.counts[i])  # Evitar log(0)
+                ucb_values[i] = self.values[i] + np.sqrt(((1 + self.alpha) * log_term) / (2 * self.counts[i]))
 
-        # Selecciona el brazo con el mayor UCB2
-        return np.argmax(ucb_values)
+        return int(np.argmax(ucb_values))  # Asegurar que sea un entero simple
 
     def update(self, arm_index: int, reward: float):
         """
@@ -44,5 +50,5 @@ class UCB2(Algorithm):
         self.counts[arm_index] += 1
         n = self.counts[arm_index]
         # Actualizamos el valor estimado del brazo usando la media incremental
-        self.values[arm_index] = (self.values[arm_index] * (n - 1) + reward) / n
+        self.values[arm_index] += (reward - self.values[arm_index]) / n
 
